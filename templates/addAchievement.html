@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Добавить достижение{% endblock title %}
+
+{% block css %}
+    <link href="http://cdn.jsdelivr.net/npm/suggestions-jquery@22.6.0/dist/css/suggestions.min.css" rel="stylesheet">
+{% endblock css %}
+    
+{% block content %}
+    <br/>
+    <div class="container min-vh-100 d-flex justify-content-center align-items-center" >
+        <form class = 'card p-5' action="{% url "personal_account:add_achievement" %}" enctype="multipart/form-data" style="max-width: 800px" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-text" for="achieveName">Название достижения:</label>
+                <input type="text" class="form-control" id="achievementName" name="achievementName">
+            </div>
+            <div class="mb-3 row">
+                <div class="col-auto">
+                    <label class="form-text label-row" for="eventName">Краткое название мероприятия:</label>
+                    <input type="text" class="form-control form-text" id="eventName" name="eventName">
+                </div>
+                <div class="col-auto">
+                    <label class="form-text label-row" for="link">Ссылка на активность:</label>
+                    <input type="url" class="form-control form-text" id="link" name="link" placeholder="https://example.com">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-text" for="images">Сертификаты:</label>
+                <input type="file" class="form-control-file" multiple id="images" name="images" required>
+            </div>            
+            <button type="submit" class="btn btn-dark form-text" style="background-color: #217C6F;">Отправить</button>
+        </form>
+    </div>
+    <br/>
+{% endblock content %}
+    
+{% block javascript %}
+    
+{% endblock javascript %}

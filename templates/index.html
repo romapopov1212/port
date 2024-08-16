@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}Портфолио{% endblock title %}
+
+{% block css %}
+{%load static %}
+<style>
+    .main-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .card {
+        margin: 1rem;
+    }
+</style>
+<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block content %}
+<section class="main-content">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <!-- Первый виджет -->
+            <div class="col-md-3 me-5">
+                <div class="card" style="width: 100%">
+                    <h2 class="card-title lead p-4 border-bottom" style="font-weight: 600">Активность CTFTIME</h2>
+                    <div class="pane border-bottom p-3">
+                        <i class="far fa-3x fa-calendar-alt text-danger ms-2" aria-hidden="true"></i>
+                        <div class="ms-3">
+                            <h2 class="card-title mb-1 lead" style="font-weight: 600">Newmarket Nights</h2>
+                            <p class="card-text mb-2">Organized by University of Oxford</p>
+                            <p class="card-text mb-0 small text-muted">Time: 6:00AM</p>
+                            <p class="card-text mb-0 small text-muted">Place: Cambridge Boat Club, Cambridge</p>
+                        </div>
+                    </div>
+                    <div class="pane border-bottom p-3">
+                        <i class="far fa-3x fa-calendar-alt text-danger" aria-hidden="true"></i>
+                        <div class="ms-3">
+                            <h2 class="card-title mb-1 lead" style="font-weight: 600">Noco Hemp Expo</h2>
+                            <p class="card-text mb-2">Organized by University of Oxford</p>
+                            <p class="card-text mb-0 small text-muted">Thu, 12 Sep - Sat, 18 Sep 2020</p>
+                            <p class="card-text mb-0 small text-muted">Place: Denver Expo Club, USA</p>
+                        </div>
+                    </div>
+                    <div class="pane border-bottom p-3">
+                        <i class="far fa-3x fa-calendar-alt text-danger ms-2" aria-hidden="true"></i>
+                        <div class="ms-3">
+                            <h2 class="card-title mb-1 lead" style="font-weight: 600">Canadian National Exhibition (CNE)</h2>
+                            <p class="card-text mb-2">Organized by University of Oxford</p>
+                            <p class="card-text mb-0 small text-muted">Fri, 20 Sep - Mon, 07 Oct 2020</p>
+                            <p class="card-text mb-0 small text-muted">Place: Toronto, Canada</p>
+                        </div>
+                    </div>
+                    <p class="card-text p-4 text-center pointer border-top">See All</p>
+                </div>
+            </div>
+            <!-- Второй виджет -->
+            <div class="col-md-5 mx-5">
+                <div class="mt-5">
+                    <h2>Таблица активностей пользователей</h2>
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th>Позиция</th>
+                                <th>Никнейм</th>
+                                <th>Баллов</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for activity in user_activities %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ activity.name }}</td>
+                                <td>{{ activity.points }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Третий виджет -->
+            <div class="col-md-3 ms-5">
+                <div class="mt-5">
+                    <h2>Список ближайших мероприятий CTFTIME</h2>
+                    <ul class="list-group">
+                        {% for event in events %}
+                        <li class="list-group-item">
+                            <h5>{{ event.name }}</h5>
+                            <p>Начало: {{ event.start_date }}</p>
+                            <a href="{{ event.link }}" class="btn btn-primary">Перейти к мероприятию</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% comment %} <section class="main-content">
+    <div class="container">
+        <div class="row">
+            <!-- Первый виджет -->
+            <div class="col-md-4">
+                <div class="card" style="width: 100%">
+                    <h2 class="card-title lead p-4 border-bottom" style="font-weight: 600">Активность CTFTIME</h2>
+                    <div class="pane border-bottom p-3">
+                        <i class="far fa-3x fa-calendar-alt text-danger ms-2" aria-hidden="true"></i>
+                        <div class="ms-3">
+                            <h2 class="card-title mb-1 lead" style="font-weight: 600">Newmarket Nights</h2>
+                            <p class="card-text mb-2">Organized by University of Oxford</p>
+                            <p class="card-text mb-0 small text-muted">Time: 6:00AM</p>
+                            <p class="card-text mb-0 small text-muted">Place: Cambridge Boat Club, Cambridge</p>
+                        </div>
+                    </div>
+                    <div class="pane border-bottom p-3">
+                        <i class="far fa-3x fa-calendar-alt text-danger" aria-hidden="true"></i>
+                        <div class="ms-3">
+                            <h2 class="card-title mb-1 lead" style="font-weight: 600">Noco Hemp Expo</h2>
+                            <p class="card-text mb-2">Organized by University of Oxford</p>
+                            <p class="card-text mb-0 small text-muted">Thu, 12 Sep - Sat, 18 Sep 2020</p>
+                            <p class="card-text mb-0 small text-muted">Place: Denver Expo Club, USA</p>
+                        </div>
+                    </div>
+                    <div class="pane border-bottom p-3">
+                        <i class="far fa-3x fa-calendar-alt text-danger ms-2" aria-hidden="true"></i>
+                        <div class="ms-3">
+                            <h2 class="card-title mb-1 lead" style="font-weight: 600">Canadian National Exhibition (CNE)</h2>
+                            <p class="card-text mb-2">Organized by University of Oxford</p>
+                            <p class="card-text mb-0 small text-muted">Fri, 20 Sep - Mon, 07 Oct 2020</p>
+                            <p class="card-text mb-0 small text-muted">Place: Toronto, Canada</p>
+                        </div>
+                    </div>
+                    <p class="card-text p-4 text-center pointer border-top">See All</p>
+                </div>
+            </div>
+            <!-- Второй виджет -->
+            <div class="col-md-4">
+                <div class="mt-5">
+                    <h2>Таблица активностей пользователей</h2>
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th>Позиция</th>
+                                <th>Никнейм</th>
+                                <th>Количество баллов</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for activity in user_activities %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ activity.name }}</td>
+                                <td>{{ activity.points }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Третий виджет -->
+            <div class="col-md-4">
+                <div class="mt-5">
+                    <h2>Список ближайших мероприятий CTFTIME</h2>
+                    <ul class="list-group">
+                        {% for event in events %}
+                        <li class="list-group-item">
+                            <h5>{{ event.name }}</h5>
+                            <p>Начало: {{ event.start_date }}</p>
+                            <a href="{{ event.link }}" class="btn btn-primary">Перейти к мероприятию</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section> {% endcomment %}
+
+{% endblock content %}
+
+{% block javascript %}
+{% endblock javascript %}
